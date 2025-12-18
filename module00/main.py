@@ -14,21 +14,43 @@ How it works:
 Make sure your exercise files are in the same folder as this main.py file!
 """
 
+# Import required modules for path manipulation
+import sys
+import os
 
-def test_ft_exercise(exercise_file_name):
+
+def add_exercise_folder_to_path(folder_name):
+    """
+    Adds the specified folder to the Python path so modules inside it can be imported.
+    """
+    # Create the absolute path to the folder
+    folder_path = os.path.join(os.path.dirname(__file__), folder_name)
+
+    # Check if the path is not already in sys.path before adding it
+    if folder_path not in sys.path:
+        sys.path.insert(0, folder_path)
+
+
+def test_ft_exercise(exercise_file_name, exercise_folder):
     """
     This function tries to run one of your exercises.
 
-    For example: test_ft_exercise("ft_plot_area") will:
-    - Look for a file called ft_plot_area.py
+    It now takes the folder name to correctly set the import path.
+
+    For example: test_ft_exercise("ft_plot_area", "ex1") will:
+    - Look in the 'ex1' folder for a file called ft_plot_area.py
     - Import it
     - Call the function ft_plot_area() inside it
     """
-    print(f"\n=== Testing {exercise_file_name} ===")
+    print(f"\n=== Testing {exercise_file_name} in {exercise_folder} ===")
+
+    # Add the folder to the path before attempting to import
+    add_exercise_folder_to_path(exercise_folder)
 
     try:
         # Import your exercise file
         # This is like doing: import ft_plot_area
+        # Since we added the folder to sys.path, Python can find it.
         ft_module = __import__(exercise_file_name)
 
         # Get the function from your file
@@ -53,10 +75,10 @@ def test_ft_exercise(exercise_file_name):
             ft_function()
 
     except ImportError:
-        print(f"❌ Could not find {exercise_file_name}.py")
+        print(f"❌ Could not find {exercise_file_name}.py in folder {exercise_folder}")
         print(
-            """   Make sure your file exists and is in the same
-            folder as main.py"""
+            """   Make sure your file exists and is in the correct
+            folder and that the folder is named correctly."""
         )
 
     except AttributeError:
@@ -84,6 +106,12 @@ def test_ft_exercise(exercise_file_name):
         print(f"❌ Error running your function: {error}")
         print("   Check your code for syntax errors")
 
+    # OPTIONAL: Remove the folder from sys.path after testing to keep it clean,
+    # but for this script, keeping it is usually fine.
+    # folder_path = os.path.join(os.path.dirname(__file__), exercise_folder)
+    # if folder_path in sys.path:
+    #     sys.path.remove(folder_path)
+
 
 def main():
     """Run main function - this runs when you execute: python3 main.py ."""
@@ -98,7 +126,7 @@ def main():
     print("4 - ft_water_reminder   (Check if plants need water)")
     print("5 - ft_count_harvest    (Count days to harvest)")
     print("6 - ft_garden_summary   (Display garden info)")
-    print("7 - ft_seed_inventory    (Seed inventory with type hints)")
+    print("7 - ft_seed_inventory   (Seed inventory with type hints)")
     print("a - test all exercises")
     print()
 
@@ -106,33 +134,35 @@ def main():
 
     # Test the exercise based on user choice
     if choice == "0":
-        test_ft_exercise("ft_hello_garden")
+        test_ft_exercise("ft_hello_garden", "ex0")
     elif choice == "1":
-        test_ft_exercise("ft_plot_area")
+        test_ft_exercise("ft_plot_area", "ex1")
     elif choice == "2":
-        test_ft_exercise("ft_harvest_total")
+        test_ft_exercise("ft_harvest_total", "ex2")
     elif choice == "3":
-        test_ft_exercise("ft_plant_age")
+        test_ft_exercise("ft_plant_age", "ex3")
     elif choice == "4":
-        test_ft_exercise("ft_water_reminder")
+        test_ft_exercise("ft_water_reminder", "ex4")
     elif choice == "5":
-        test_ft_exercise("ft_count_harvest_iterative")
-        test_ft_exercise("ft_count_harvest_recursive")
+        # Note: ft_count_harvest_iterative is in ex5
+        test_ft_exercise("ft_count_harvest_iterative", "ex5")
+        # Note: ft_count_harvest_recursive is also in ex5
+        test_ft_exercise("ft_count_harvest_recursive", "ex5")
     elif choice == "6":
-        test_ft_exercise("ft_garden_summary")
+        test_ft_exercise("ft_garden_summary", "ex6")
     elif choice == "7":
-        test_ft_exercise("ft_seed_inventory")
+        test_ft_exercise("ft_seed_inventory", "ex7")
     elif choice == "a":
         # Test all exercises one by one
-        test_ft_exercise("ft_hello_garden")
-        test_ft_exercise("ft_plot_area")
-        test_ft_exercise("ft_harvest_total")
-        test_ft_exercise("ft_plant_age")
-        test_ft_exercise("ft_water_reminder")
-        test_ft_exercise("ft_count_harvest_iterative")
-        test_ft_exercise("ft_count_harvest_recursive")
-        test_ft_exercise("ft_garden_summary")
-        test_ft_exercise("ft_seed_inventory")
+        test_ft_exercise("ft_hello_garden", "ex0")
+        test_ft_exercise("ft_plot_area", "ex1")
+        test_ft_exercise("ft_harvest_total", "ex2")
+        test_ft_exercise("ft_plant_age", "ex3")
+        test_ft_exercise("ft_water_reminder", "ex4")
+        test_ft_exercise("ft_count_harvest_iterative", "ex5")
+        test_ft_exercise("ft_count_harvest_recursive", "ex5")
+        test_ft_exercise("ft_garden_summary", "ex6")
+        test_ft_exercise("ft_seed_inventory", "ex7")
     else:
         print("❌ Invalid choice! Please enter 0, 1, 2, 3, 4, 5, 6, 7, or a")
 
