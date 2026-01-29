@@ -1,0 +1,3 @@
+[submodule "Module00"]
+	path = Module00
+	url = https://github.com/spacotto/Python_Module00.git
