@@ -1,3 +1,6 @@
 [submodule "Module00"]
 	path = Module00
 	url = https://github.com/spacotto/Python_Module00.git
+[submodule "Module01"]
+	path = Module01
+	url = https://github.com/spacotto/Python_Module01.git
