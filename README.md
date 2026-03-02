@@ -23,6 +23,7 @@ for modern Python development.
 **Garden Guardian, Data Engineering for Smart Agriculture.** Build resilient data pipelines for your smart garden! Learn to handle sensor failures, process agricultural data streams, and create robust monitoring systems that keep your digital greenhouse thriving.
 
 ## Module 03 
+**Data Quest, Mastering Python Collections for Data Engineering.** Journey through the digital realm as a data engineer! Master Python’s powerful data structures while building game analytics systems, processing player statistics, and creating streaming data pipelines in the Pixel Dimension.
 
 ## Module 04 
 
