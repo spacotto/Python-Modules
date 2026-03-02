@@ -28,3 +28,6 @@
 [submodule "Module09"]
 	path = Module09
 	url = git@github.com:spacotto/PythonModule09.git
+[submodule "Module10"]
+	path = Module10
+	url = git@github.com:spacotto/PythonModule10.git
